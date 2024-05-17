@@ -1,0 +1,53 @@
+
+    [
+      {
+        "id": 1,
+        "name": "Marco",
+        "surname": "Rossi",
+        "city": "Roma",
+        "hobbies": [
+          {
+            "id": 101,
+            "description": "Leggere libri di avventura"
+          },
+          {
+            "id": 102,
+            "description": "Escursionismo"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Giulia",
+        "surname": "Bianchi",
+        "city": "Milano",
+        "hobbies": [
+          {
+            "id": 201,
+            "description": "Pittura"
+          },
+          {
+            "id": 202,
+            "description": "Yoga"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Luca",
+        "surname": "Verdi",
+        "city": "Napoli",
+        "hobbies": [
+          {
+            "id": 301,
+            "description": "Fotografia"
+          },
+          {
+            "id": 302,
+            "description": "Cucina"
+          }
+        ]
+      }
+    ]
+
+  
