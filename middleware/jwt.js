@@ -1,31 +1,28 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
-let option = {
+const option = {
     algorithm: "HS256",
     expiresIn: "1h"
-}
+};
 
-//metodo che si occupa di rilasciare il token
-const setToken = (username)=> {
-    let payload = {
-        username : username
-    }
-
-    let token = jwt.sign(payload, 'secret',option)
-
+const setToken = (username) => {
+    const payload = { username };
+    const token = jwt.sign(payload, 'secret', option);
     return token;
-}
-
-//metodo che si occupa di estrarre il payload dal token
+};
 
 const getPayload = (token) => {
-    let patload = jwt.decode(token,{complete:true})
-}
+    const payload = jwt.decode(token, { complete: true });
+    return payload;
+};
 
-//metodo che si occuperà di verificare il token
 const checkToken = (token) => {
-    jwt.verify(token, 'secre', option)
-}
+    try {
+        const decoded = jwt.verify(token, 'secret', option);
+        return decoded;
+    } catch (err) {
+        return null;
+    }
+};
 
-module.exports = {setToken, getPayload, checkToken}
-
+module.exports = { setToken, getPayload, checkToken };

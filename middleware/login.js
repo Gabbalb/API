@@ -1,16 +1,13 @@
-const jwt = require("./jwt.js")
+const jwt = require("../jwt.js");
 
 const login = (req, res, next) => {
-    console.log(req.body.username === "admin")
-    if(req.body.username === 'admin'){
-        console.log("login effettuato")
-        let token = jwt.setToken(req.body.username)
-        console.log(token)
+    if (req.body.username === 'admin') {
+        const token = jwt.setToken(req.body.username);
+        res.setHeader('Authorization', token);
         next();
+    } else {
+        res.status(401).send("Login fallito");
     }
-    else {
-        res.status(401).send("login fallito");
-    }
-}
+};
 
-module.exports = login
+module.exports = login;
