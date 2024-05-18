@@ -1,13 +1,16 @@
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 
 const option = {
-    algorithm: "HS256",
+    algorithm: "RS256",
     expiresIn: "1h"
 };
 
 const setToken = (username) => {
     const payload = { username };
-    const token = jwt.sign(payload, 'secret', option);
+    const privateKey = fs.readFileSync("./rsa.key");
+
+    const token = jwt.sign(payload, privateKey, option);
     return token;
 };
 
@@ -17,12 +20,8 @@ const getPayload = (token) => {
 };
 
 const checkToken = (token) => {
-    try {
-        const decoded = jwt.verify(token, 'secret', option);
-        return decoded;
-    } catch (err) {
-        return null;
-    }
+    const publicKey = fs.readFileSync("./rsa.pem");
+    jwt.verify(token, publicKey, option);
 };
 
 module.exports = { setToken, getPayload, checkToken };

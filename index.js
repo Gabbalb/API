@@ -7,7 +7,7 @@ const auth = require("./middleware/auth.js");
 app.use(express.json());
 
 // GET requests
-app.get("/", (req, res) => res.send("homepage"));
+app.get("/", auth, (req, res) => res.send("homepage"));
 app.get("/persone", (req, res) => res.json(persone));
 app.get("/persone/:id", (req, res) => {
     const { id } = req.params;
@@ -74,3 +74,5 @@ app.put('/persone/:id', auth, (req, res) => {
         res.json(updatedPersona);
     }
 });
+
+app.listen(6969)

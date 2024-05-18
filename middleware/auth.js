@@ -1,26 +1,18 @@
-const jws = require('./jwt.js')
+const jwt = require('./jwt.js')
 
 
 const auth = (req, res, next) => {
-
+    if (req.headers['authorization'] == null)
+        res.sendStatus(401);
+    try {
+        let token = req.headers['authorization'];
+        token = token.slice(7);
+        jwt.checkToken(token);
+        next();
+    } catch (error) {
+        console.log(error.message)
+        res.sendStatus(401)
+    }
 }
 
-
-/* LA FAREMO SABATO MA IL BRO HA OVERCOOKATO
-const auth = (req, res, next) => {
-    const token = req.headers['authorization'];
-
-    if (!token) {
-        return res.status(401).send('Token mancante');
-    }
-
-    jwt.verify(token, 'secret', (err, decoded) => {
-        if (err) {
-            return res.status(401).send('Token non valido');
-        }
-
-        req.user = decoded;
-        next();
-    });
-};
- */
+module.exports = auth;
